@@ -8,8 +8,7 @@ try:
   import requests
 except ImportError:
     print("Error: requests is not installed")
-    print("Installing Requests is simple with pip:\n  pip install requests")
-    print("More info: http://docs.python-requests.org/en/latest/")
+    print("Run pip install -r requirements.txt before continuing")
     exit(1)
 
 if (len(sys.argv) < 2):
