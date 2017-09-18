@@ -7,6 +7,8 @@ repository
 # Usage
 
 Usage is as simple as `./stats.py <github_username> <name_of_repository>`
+or you can run `./stats.py <github_username> <name_of_repository> <tag_name>` to get stats
+about a particular tag. If the tag is not found, we fallback to displaying all releases.
 
 For example, here's the stats for [kubernetes](https://github.com/kubernetes/kubernetes)
 
