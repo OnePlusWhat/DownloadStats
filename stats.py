@@ -11,11 +11,6 @@ except ImportError:
     print("Run pip install -r requirements.txt before continuing")
     exit(1)
 
-if len(sys.argv) < 2:
-    print("Usage: " + sys.argv[0] + " github-user [github-project]")
-    exit(1)
-
-
 def dict_to_object(d):
     if '__class__' in d:
         class_name = d.pop('__class__')
@@ -39,12 +34,15 @@ full_names = []
 
 if len(sys.argv) == 3:
     full_names.append(sys.argv[1] + "/" + sys.argv[2])
-else:
+elif len(sys.argv) == 2:
     r = requests.get('https://api.github.com/users/' + sys.argv[1] + '/repos')
     myobj = r.json()
 
     for rep in myobj:
         full_names.insert(0, ensure_str(rep['full_name']))
+else:
+    print("Usage: " + sys.argv[0] + " github-user [github-project]")
+    exit(1)
 
 for full_name in full_names:
     buf = io.StringIO()
