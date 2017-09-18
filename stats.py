@@ -60,12 +60,12 @@ for full_name in full_names:
             if "assets" in p:
                 for asset in p['assets']:
                     if len(tag_name) == 0 or p['tag_name'] != tag_name:
-                        print(asset['name'] + ", tag: " + p['tag_name'] + ", created at " + asset['created_at'])
+                        print(asset['name'] + ", tag: " + p['tag_name'] + ", created on " + asset['created_at'].split('T')[0])
                         print("Downloaded " + str(asset['download_count']) + " times")
                         print("")
                     else:
                         if p['tag_name'] == tag_name:
-                            print(asset['name'] + ", tag: " + p['tag_name'] + ", created at " + asset['created_at'])
+                            print(asset['name'] + ", tag: " + p['tag_name'] + ", created on " + asset['created_at'].split('T')[0])
                             print("Downloaded " + str(asset['download_count']) + " times")
                             print("")
                             exit(2)
