@@ -2,14 +2,17 @@
 
 import sys
 import io
+
 from future.types.newstr import unicode
 
+tag_name = ""
 try:
     import requests
 except ImportError:
     print("Error: requests is not installed")
     print("Run pip install -r requirements.txt before continuing")
     exit(1)
+
 
 def dict_to_object(d):
     if '__class__' in d:
@@ -40,6 +43,9 @@ elif len(sys.argv) == 2:
 
     for rep in myobj:
         full_names.insert(0, ensure_str(rep['full_name']))
+elif len(sys.argv) == 4:
+    full_names.append(sys.argv[1] + "/" + sys.argv[2])
+    tag_name = sys.argv[3]
 else:
     print("Usage: " + sys.argv[0] + " github-user [github-project]")
     exit(1)
@@ -53,9 +59,16 @@ for full_name in full_names:
         for p in myobj:
             if "assets" in p:
                 for asset in p['assets']:
-                    print(asset['name'] + ", tag: " + p['tag_name'] + ", created at " + asset['created_at'])
-                    print("Downloaded " + str(asset['download_count']) + " times")
-                    print("")
+                    if len(tag_name) == 0 or p['tag_name'] != tag_name:
+                        print(asset['name'] + ", tag: " + p['tag_name'] + ", created at " + asset['created_at'])
+                        print("Downloaded " + str(asset['download_count']) + " times")
+                        print("")
+                    else:
+                        if p['tag_name'] == tag_name:
+                            print(asset['name'] + ", tag: " + p['tag_name'] + ", created at " + asset['created_at'])
+                            print("Downloaded " + str(asset['download_count']) + " times")
+                            print("")
+                            exit(2)
             else:
                 print("No data")
     except:
