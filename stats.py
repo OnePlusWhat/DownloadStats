@@ -14,19 +14,6 @@ except ImportError:
     exit(1)
 
 
-def dict_to_object(d):
-    if '__class__' in d:
-        class_name = d.pop('__class__')
-        module_name = d.pop('__module__')
-        module_name = __import__(module_name)
-        class_ = getattr(module_name, class_name)
-        args = dict((key.encode('ascii'), value) for key, value in d.items())
-        inst = class_(**args)
-    else:
-        inst = d
-    return inst
-
-
 def ensure_str(s):
     if isinstance(s, unicode):
         s = s.encode('utf-8')
