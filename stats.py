@@ -44,17 +44,15 @@ for full_name in full_names:
         myobj = r.json()
 
         for p in myobj:
+            print("\n")
             if "assets" in p:
+                print("Tag: " + p['tag_name'] + ", Created on " + p['created_at'].split('T')[0])
                 for asset in p['assets']:
                     if len(tag_name) == 0 or p['tag_name'] != tag_name:
-                        print(asset['name'] + ", tag: " + p['tag_name'] + ", created on " + asset['created_at'].split('T')[0])
-                        print("Downloaded " + str(asset['download_count']) + " times")
-                        print("")
+                        print(asset['name'] + ", Downloaded " + str(asset['download_count']) + " times")
                     else:
                         if p['tag_name'] == tag_name:
-                            print(asset['name'] + ", tag: " + p['tag_name'] + ", created on " + asset['created_at'].split('T')[0])
-                            print("Downloaded " + str(asset['download_count']) + " times")
-                            print("")
+                            print(asset['name'] + ", Downloaded " + str(asset['download_count']) + " times")
                             exit(2)
             else:
                 print("No data")
